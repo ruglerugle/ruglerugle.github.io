@@ -4,25 +4,27 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>情報技術クエスト集 ― ruglerugle学習ゲーム一覧 ―</title>
-<meta name="description" content="アルゴリズム・CPU・メモリ・ネットワーク・OOP・ポインタを学べる無料ブラウザ学習ゲーム集。">
+<meta name="description" content="アルゴリズム・CPU・メモリ・ネットワーク・OOP・ポインタを学べる無料ブラウザ学習ゲーム集。ワールドマップから各クエストへ出発しよう。">
 <style>
   :root{
-    --bg0:#0a0e1a;
-    --bg1:#0f1526;
-    --panel:rgba(255,255,255,.04);
-    --panel-b:rgba(255,255,255,.10);
-    --tp:#eef2fb;
-    --ts:#a8b2c9;
-    --tm:#6b7690;
+    --bg0:#080b16;
+    --bg1:#0d1326;
+    --map-line:#e8cf8a;
+    --panel:rgba(10,14,28,.72);
+    --panel-b:rgba(232,207,138,.28);
+    --tp:#f2f0e6;
+    --ts:#b9c0d8;
+    --tm:#7680a0;
     --gold:#f3c96a;
   }
   *{box-sizing:border-box}
   html,body{margin:0;padding:0}
   body{
     background:
-      radial-gradient(1200px 600px at 15% -10%, rgba(120,140,255,.10), transparent 60%),
-      radial-gradient(900px 500px at 90% 10%, rgba(255,190,120,.08), transparent 60%),
-      linear-gradient(180deg,var(--bg0),var(--bg1) 40%,var(--bg0));
+      radial-gradient(1100px 560px at 12% -8%, rgba(120,140,255,.12), transparent 60%),
+      radial-gradient(900px 520px at 92% 6%, rgba(255,190,120,.09), transparent 60%),
+      radial-gradient(700px 500px at 50% 110%, rgba(120,255,200,.06), transparent 60%),
+      linear-gradient(180deg,var(--bg0),var(--bg1) 45%,var(--bg0));
     color:var(--tp);
     font-family:"Hiragino Sans","Yu Gothic",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
     min-height:100vh;
@@ -39,64 +41,155 @@
       radial-gradient(1.5px 1.5px at 90px 200px, rgba(255,255,255,.3), transparent);
     background-repeat:repeat;
     background-size:480px 240px;
-    opacity:.6;
+    opacity:.55;
   }
-  .wrap{position:relative;z-index:1;max-width:1080px;margin:0 auto;padding:64px 24px 40px}
+  .wrap{position:relative;z-index:1;max-width:1160px;margin:0 auto;padding:48px 20px 40px}
 
-  header{text-align:center;margin-bottom:56px}
+  header{text-align:center;margin-bottom:34px}
   .eyebrow{
     display:inline-block;font-size:12px;letter-spacing:.2em;color:var(--gold);
-    border:1px solid rgba(243,201,106,.35);border-radius:999px;padding:4px 14px;margin-bottom:18px;
+    border:1px solid rgba(243,201,106,.35);border-radius:999px;padding:4px 14px;margin-bottom:16px;
   }
   h1{
-    font-size:clamp(28px,4.5vw,42px);margin:0 0 14px;font-weight:800;letter-spacing:.02em;
+    font-size:clamp(26px,4.2vw,40px);margin:0 0 12px;font-weight:800;letter-spacing:.03em;
     background:linear-gradient(90deg,#fff,#c9d4f5 60%,var(--gold));
     -webkit-background-clip:text;background-clip:text;color:transparent;
   }
-  header p{color:var(--ts);max-width:560px;margin:0 auto;font-size:15px}
+  header p{color:var(--ts);max-width:560px;margin:0 auto;font-size:14.5px}
 
-  .grid{
-    display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px;
+  /* ===== Map ===== */
+  .map-frame{
+    position:relative;
+    border:1px solid rgba(232,207,138,.35);
+    border-radius:20px;
+    padding:10px;
+    background:linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,0));
+    box-shadow:0 0 0 1px rgba(0,0,0,.4) inset, 0 30px 60px -30px rgba(0,0,0,.7);
   }
-  a.card{
-    position:relative;display:flex;flex-direction:column;gap:10px;
-    background:var(--panel);border:1px solid var(--panel-b);border-radius:16px;
-    padding:24px 22px;text-decoration:none;color:inherit;
-    transition:transform .18s ease, border-color .18s ease, box-shadow .18s ease, background .18s ease;
+  .map{
+    position:relative;
+    width:100%;
+    aspect-ratio:5/3.1;
+    border-radius:14px;
     overflow:hidden;
+    background:
+      radial-gradient(220px 160px at 12% 80%, rgba(126,224,127,.16), transparent 70%),
+      radial-gradient(220px 170px at 30% 65%, rgba(126,224,127,.13), transparent 70%),
+      radial-gradient(240px 190px at 43% 32%, rgba(143,123,255,.16), transparent 70%),
+      radial-gradient(230px 190px at 62% 52%, rgba(255,182,72,.15), transparent 70%),
+      radial-gradient(240px 190px at 76% 25%, rgba(79,216,196,.16), transparent 70%),
+      radial-gradient(230px 190px at 90% 15%, rgba(240,149,95,.17), transparent 70%),
+      linear-gradient(160deg,#0b1122,#131c33 55%,#0b1122);
   }
-  a.card::before{
-    content:"";position:absolute;inset:0;border-radius:16px;padding:1px;
-    background:linear-gradient(135deg,var(--accent),transparent 55%);
-    -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);
-    -webkit-mask-composite:xor;mask-composite:exclude;
-    opacity:.55;pointer-events:none;
+  .map svg.terrain{position:absolute;inset:0;width:100%;height:100%}
+  .grid-lines{position:absolute;inset:0;opacity:.25;
+    background-image:linear-gradient(rgba(232,207,138,.08) 1px, transparent 1px),
+                      linear-gradient(90deg, rgba(232,207,138,.08) 1px, transparent 1px);
+    background-size:8.333% 10%;
   }
-  a.card:hover{
-    transform:translateY(-4px);
-    border-color:var(--accent);
-    background:rgba(255,255,255,.06);
-    box-shadow:0 12px 30px -12px var(--accent);
+  .fog{position:absolute;inset:0;pointer-events:none;
+    background:
+      radial-gradient(320px 220px at 0% 0%, rgba(8,11,22,.85), transparent 70%),
+      radial-gradient(320px 220px at 100% 100%, rgba(8,11,22,.6), transparent 70%);
   }
-  .icon{
-    width:44px;height:44px;border-radius:12px;display:flex;align-items:center;justify-content:center;
-    font-size:22px;background:color-mix(in srgb, var(--accent) 22%, transparent);
-    border:1px solid color-mix(in srgb, var(--accent) 45%, transparent);
-  }
-  .card h2{margin:4px 0 0;font-size:18px;font-weight:700;color:#fff}
-  .card .sub{font-size:12px;color:var(--accent);letter-spacing:.06em;font-weight:600}
-  .card p.desc{margin:2px 0 0;font-size:13.5px;color:var(--ts)}
-  .tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:auto;padding-top:10px}
-  .tag{font-size:11px;color:var(--tm);border:1px solid rgba(255,255,255,.12);border-radius:999px;padding:2px 9px}
-  .go{
-    margin-top:8px;font-size:13px;font-weight:700;color:var(--accent);
-    display:flex;align-items:center;gap:6px;
-  }
-  .go svg{transition:transform .18s ease}
-  a.card:hover .go svg{transform:translateX(3px)}
 
-  footer{margin-top:64px;text-align:center;color:var(--tm);font-size:12.5px}
-  footer a{color:var(--ts)}
+  .deco{position:absolute;font-size:20px;opacity:.55;filter:drop-shadow(0 2px 3px rgba(0,0,0,.5));user-select:none;pointer-events:none}
+
+  .trail-glow{fill:none;stroke:var(--gold);stroke-width:.9;opacity:.25;filter:blur(2px)}
+  .trail{fill:none;stroke:var(--gold);stroke-width:.55;stroke-linecap:round;stroke-dasharray:2.2 2.6;opacity:.85}
+
+  .flag{position:absolute;left:4.5%;top:83%;transform:translate(-50%,-100%);font-size:26px;filter:drop-shadow(0 3px 4px rgba(0,0,0,.6))}
+  .flag .label{position:absolute;top:100%;left:50%;transform:translateX(-50%);white-space:nowrap;font-size:10px;color:var(--gold);letter-spacing:.1em;margin-top:2px}
+
+  .node{
+    position:absolute;transform:translate(-50%,-50%);
+    display:flex;flex-direction:column;align-items:center;gap:6px;
+    text-decoration:none;color:inherit;
+    z-index:2;
+  }
+  .node .badge{
+    width:56px;height:56px;border-radius:50%;
+    display:flex;align-items:center;justify-content:center;font-size:26px;
+    background:radial-gradient(circle at 35% 30%, color-mix(in srgb, var(--accent) 55%, #0b1122), #0b1122 75%);
+    border:2px solid var(--accent);
+    box-shadow:0 0 0 4px rgba(8,11,22,.55), 0 0 18px -2px var(--accent), 0 6px 14px -6px rgba(0,0,0,.7);
+    transition:transform .18s ease, box-shadow .18s ease;
+    position:relative;
+  }
+  .node .badge::after{
+    content:"";position:absolute;inset:-8px;border-radius:50%;
+    border:1px dashed color-mix(in srgb, var(--accent) 55%, transparent);
+    opacity:0;transition:opacity .18s ease, transform .5s ease;
+  }
+  .node .num{
+    position:absolute;top:-4px;right:-4px;width:18px;height:18px;border-radius:50%;
+    background:var(--accent);color:#0b1122;font-size:10px;font-weight:800;
+    display:flex;align-items:center;justify-content:center;
+    box-shadow:0 0 0 2px #0b1122;
+  }
+  .node .label{
+    background:rgba(8,11,22,.78);border:1px solid color-mix(in srgb, var(--accent) 55%, transparent);
+    border-radius:8px;padding:3px 9px;font-size:11px;font-weight:700;color:#fff;white-space:nowrap;
+    letter-spacing:.02em;
+  }
+  .node:hover .badge, .node:focus-visible .badge{
+    transform:translateY(-4px) scale(1.06);
+    box-shadow:0 0 0 4px rgba(8,11,22,.55), 0 0 26px 2px var(--accent), 0 10px 16px -6px rgba(0,0,0,.7);
+  }
+  .node:hover .badge::after, .node:focus-visible .badge::after{opacity:1;transform:rotate(25deg)}
+  .node:focus-visible{outline:none}
+  .node.active .badge{
+    transform:translateY(-4px) scale(1.06);
+    box-shadow:0 0 0 4px rgba(8,11,22,.55), 0 0 26px 2px var(--accent), 0 10px 16px -6px rgba(0,0,0,.7);
+  }
+
+  /* Node position presets */
+  .n1{left:9%; top:82%}
+  .n2{left:26%; top:64%}
+  .n3{left:40%; top:34%}
+  .n4{left:58%; top:52%}
+  .n5{left:73%; top:26%}
+  .n6{left:89%; top:12%}
+
+  .compass{position:absolute;top:14px;right:16px;width:44px;height:44px;opacity:.75}
+
+  /* ===== Quest log panel ===== */
+  .questlog{
+    margin-top:18px;
+    background:var(--panel);border:1px solid var(--panel-b);border-radius:14px;
+    padding:18px 20px;display:flex;gap:16px;align-items:flex-start;
+    min-height:88px;
+  }
+  .questlog .qi{
+    flex:0 0 auto;width:48px;height:48px;border-radius:12px;
+    display:flex;align-items:center;justify-content:center;font-size:24px;
+    background:color-mix(in srgb, var(--accent,#f3c96a) 20%, transparent);
+    border:1px solid color-mix(in srgb, var(--accent,#f3c96a) 45%, transparent);
+    transition:background .15s ease, border-color .15s ease;
+  }
+  .questlog .qt{flex:1;min-width:0}
+  .questlog .qsub{font-size:11px;letter-spacing:.1em;color:var(--accent,var(--gold));font-weight:700;margin-bottom:2px}
+  .questlog h3{margin:0 0 6px;font-size:16px;color:#fff}
+  .questlog p{margin:0 0 10px;font-size:13px;color:var(--ts)}
+  .questlog .tags{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:10px}
+  .questlog .tag{font-size:11px;color:var(--tm);border:1px solid rgba(255,255,255,.12);border-radius:999px;padding:2px 9px}
+  .questlog .go{
+    display:inline-flex;align-items:center;gap:6px;font-size:13px;font-weight:700;
+    color:#0b1122;background:var(--gold);border-radius:8px;padding:7px 14px;text-decoration:none;
+    transition:filter .15s ease;
+  }
+  .questlog .go:hover{filter:brightness(1.08)}
+  .questlog .hint{color:var(--tm);font-size:13px;margin:auto}
+
+  footer{margin-top:40px;text-align:center;color:var(--tm);font-size:12.5px}
+
+  @media (max-width:640px){
+    .node .badge{width:44px;height:44px;font-size:20px}
+    .node .label{font-size:9px;padding:2px 6px}
+    .deco{font-size:15px}
+    .flag{font-size:20px}
+    .questlog{flex-direction:column}
+  }
 
   @media (prefers-color-scheme: light){
     body{
@@ -106,10 +199,11 @@
         linear-gradient(180deg,#f7f8fc,#eef1f9 40%,#f7f8fc);
       color:#1b2233;
     }
-    :root{--panel:rgba(20,30,60,.03);--panel-b:rgba(20,30,60,.10);--ts:#4c5670;--tm:#8590a8}
-    .stars{opacity:.25;filter:invert(1)}
+    :root{--ts:#4c5670;--tm:#8590a8;--panel:rgba(255,255,255,.75);--panel-b:rgba(20,30,60,.12)}
+    .stars{opacity:.2;filter:invert(1)}
     h1{background:linear-gradient(90deg,#1b2233,#3a4a8a 60%,#b8860b);-webkit-background-clip:text;background-clip:text;color:transparent}
-    .card h2{color:#1b2233}
+    .questlog h3{color:#1b2233}
+    .node .label{color:#1b2233;background:rgba(255,255,255,.85)}
   }
 </style>
 </head>
@@ -120,65 +214,97 @@
   <header>
     <span class="eyebrow">FREE BROWSER LEARNING GAMES</span>
     <h1>情報技術クエスト集</h1>
-    <p>アルゴリズムからCPU・メモリ・ネットワーク・OOP・ポインタまで。<br>ブラウザだけで遊びながら学べる学習ゲームシリーズです。</p>
+    <p>王国に広がる6つの領域 ― アルゴリズム・OOP・CPU・メモリ・ネットワーク・ポインタ。地図から気になるクエストへ旅立とう。</p>
   </header>
 
-  <div class="grid">
+  <div class="map-frame">
+    <div class="map" id="map">
 
-    <a class="card" style="--accent:#5ec8ff" href="https://ruglerugle.github.io/algo-quest/">
-      <div class="icon">🗺️</div>
-      <div class="sub">ALGORITHM</div>
-      <h2>ALGO QUEST</h2>
-      <p class="desc">王国の物流エンジニアとして、探索・ソート・データ構造を駆使して配送網を最適化する。</p>
-      <div class="tags"><span class="tag">アルゴリズム</span><span class="tag">データ構造</span></div>
-      <div class="go">遊びに行く <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-    </a>
+      <div class="grid-lines"></div>
 
-    <a class="card" style="--accent:#8f7bff" href="https://ruglerugle.github.io/cpu-logic-game/">
-      <div class="icon">🧮</div>
-      <div class="sub">CPU / LOGIC CIRCUIT</div>
-      <h2>論理回路CPUクエスト</h2>
-      <p class="desc">AND・ORゲートから積み上げ、命令が実行されるまでの論理回路とCPUの仕組みを体感する。</p>
-      <div class="tags"><span class="tag">論理回路</span><span class="tag">CPU</span></div>
-      <div class="go">遊びに行く <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-    </a>
+      <svg class="terrain" viewBox="0 0 100 60" preserveAspectRatio="none">
+        <path class="trail-glow" d="M9,49.2 C15,44 20,42 15.6,38.4 C11,34.6 20,32 26,38.4 C31,43.6 34,38 32,33 C30,27 36,22 40,20.4 C44,18.8 48,24 50,26.8 C52,29.6 55,32.6 58,31.2 C62,29.4 60,23 65,21 C69.4,19.2 70,17.6 73,15.6 C76,13.6 80,15 82,13 C84.6,10.4 86,10 89,7.2"/>
+        <path class="trail" d="M9,49.2 C15,44 20,42 15.6,38.4 C11,34.6 20,32 26,38.4 C31,43.6 34,38 32,33 C30,27 36,22 40,20.4 C44,18.8 48,24 50,26.8 C52,29.6 55,32.6 58,31.2 C62,29.4 60,23 65,21 C69.4,19.2 70,17.6 73,15.6 C76,13.6 80,15 82,13 C84.6,10.4 86,10 89,7.2"/>
+      </svg>
 
-    <a class="card" style="--accent:#ffb648" href="https://ruglerugle.github.io/memory-quest/">
-      <div class="icon">🧠</div>
-      <div class="sub">MEMORY / OS</div>
-      <h2>MEMORY QUEST</h2>
-      <p class="desc">王国の記憶管理士として、RAM・スタック・ヒープ・GC・キャッシュ・仮想メモリの仕組みを巡る。</p>
-      <div class="tags"><span class="tag">メモリ管理</span><span class="tag">OS/アーキテクチャ</span></div>
-      <div class="go">遊びに行く <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-    </a>
+      <!-- decorative scenery -->
+      <span class="deco" style="left:5%;top:70%" aria-hidden="true">🏘️</span>
+      <span class="deco" style="left:16%;top:88%" aria-hidden="true">🌾</span>
+      <span class="deco" style="left:22%;top:50%" aria-hidden="true">🌲</span>
+      <span class="deco" style="left:33%;top:72%" aria-hidden="true">🌳</span>
+      <span class="deco" style="left:35%;top:18%" aria-hidden="true">⛰️</span>
+      <span class="deco" style="left:48%;top:12%" aria-hidden="true">🏔️</span>
+      <span class="deco" style="left:54%;top:66%" aria-hidden="true">💎</span>
+      <span class="deco" style="left:64%;top:40%" aria-hidden="true">🌊</span>
+      <span class="deco" style="left:80%;top:38%" aria-hidden="true">🌊</span>
+      <span class="deco" style="left:95%;top:28%" aria-hidden="true">⛩️</span>
+      <span class="deco" style="left:85%;top:4%" aria-hidden="true">🏯</span>
 
-    <a class="card" style="--accent:#4fd8c4" href="https://ruglerugle.github.io/net-quest/">
-      <div class="icon">📡</div>
-      <div class="sub">NETWORK</div>
-      <h2>NET QUEST</h2>
-      <p class="desc">届け、そのパケット。IPアドレスやルーティング、プロトコルの階層をたどりながら通信の仕組みを学ぶ。</p>
-      <div class="tags"><span class="tag">ネットワーク</span><span class="tag">通信プロトコル</span></div>
-      <div class="go">遊びに行く <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-    </a>
+      <div class="flag" aria-hidden="true">🚩<span class="label">START</span></div>
 
-    <a class="card" style="--accent:#7fe07f" href="https://ruglerugle.github.io/oop-game/">
-      <div class="icon">🦒</div>
-      <div class="sub">OBJECT ORIENTED</div>
-      <h2>OOPクエスト</h2>
-      <p class="desc">動物園チュートリアルから始まり、クラス・継承・ポリモーフィズムなどOOPの考え方を学ぶ。</p>
-      <div class="tags"><span class="tag">オブジェクト指向</span><span class="tag">設計</span></div>
-      <div class="go">遊びに行く <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-    </a>
+      <svg class="compass" viewBox="0 0 100 100">
+        <circle cx="50" cy="50" r="46" fill="rgba(8,11,22,.5)" stroke="var(--gold)" stroke-width="2"/>
+        <path d="M50 8 L58 50 L50 92 L42 50 Z" fill="var(--gold)" opacity=".85"/>
+        <path d="M8 50 L50 42 L92 50 L50 58 Z" fill="var(--gold)" opacity=".5"/>
+        <text x="50" y="20" text-anchor="middle" font-size="12" fill="var(--gold)" font-weight="700">N</text>
+      </svg>
 
-    <a class="card" style="--accent:#f0955f" href="https://ruglerugle.github.io/c-pointer-dojo/">
-      <div class="icon">👉</div>
-      <div class="sub">C LANGUAGE / POINTER</div>
-      <h2>C POINTER DOJO</h2>
-      <p class="desc">変数とアドレスからmalloc/free、二重ポインタ、連結リストまで。Cコードを1行ずつ実行してスタック/ヒープを可視化。</p>
-      <div class="tags"><span class="tag">C言語</span><span class="tag">ポインタ</span></div>
-      <div class="go">遊びに行く <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-    </a>
+      <div class="fog"></div>
 
+      <!-- quest nodes -->
+      <a class="node n1" href="https://ruglerugle.github.io/algo-quest/"
+         data-accent="#5ec8ff" data-icon="🗺️" data-sub="ALGORITHM" data-title="ALGO QUEST"
+         data-desc="王国の物流エンジニアとして、探索・ソート・データ構造を駆使して配送網を最適化する。"
+         data-tags="アルゴリズム,データ構造" data-num="1">
+        <div class="badge" style="--accent:#5ec8ff">🗺️<span class="num">1</span></div>
+        <div class="label">ALGO QUEST</div>
+      </a>
+
+      <a class="node n2" href="https://ruglerugle.github.io/cpu-logic-game/"
+         data-accent="#8f7bff" data-icon="🧮" data-sub="CPU / LOGIC CIRCUIT" data-title="論理回路CPUクエスト"
+         data-desc="AND・ORゲートから積み上げ、命令が実行されるまでの論理回路とCPUの仕組みを体感する。"
+         data-tags="論理回路,CPU" data-num="2">
+        <div class="badge" style="--accent:#8f7bff">🧮<span class="num">2</span></div>
+        <div class="label">CPUクエスト</div>
+      </a>
+
+      <a class="node n3" href="https://ruglerugle.github.io/memory-quest/"
+         data-accent="#ffb648" data-icon="🧠" data-sub="MEMORY / OS" data-title="MEMORY QUEST"
+         data-desc="王国の記憶管理士として、RAM・スタック・ヒープ・GC・キャッシュ・仮想メモリの仕組みを巡る。"
+         data-tags="メモリ管理,OS/アーキテクチャ" data-num="3">
+        <div class="badge" style="--accent:#ffb648">🧠<span class="num">3</span></div>
+        <div class="label">MEMORY QUEST</div>
+      </a>
+
+      <a class="node n4" href="https://ruglerugle.github.io/net-quest/"
+         data-accent="#4fd8c4" data-icon="📡" data-sub="NETWORK" data-title="NET QUEST"
+         data-desc="届け、そのパケット。IPアドレスやルーティング、プロトコルの階層をたどりながら通信の仕組みを学ぶ。"
+         data-tags="ネットワーク,通信プロトコル" data-num="4">
+        <div class="badge" style="--accent:#4fd8c4">📡<span class="num">4</span></div>
+        <div class="label">NET QUEST</div>
+      </a>
+
+      <a class="node n5" href="https://ruglerugle.github.io/oop-game/"
+         data-accent="#7fe07f" data-icon="🦒" data-sub="OBJECT ORIENTED" data-title="OOPクエスト"
+         data-desc="動物園チュートリアルから始まり、クラス・継承・ポリモーフィズムなどOOPの考え方を学ぶ。"
+         data-tags="オブジェクト指向,設計" data-num="5">
+        <div class="badge" style="--accent:#7fe07f">🦒<span class="num">5</span></div>
+        <div class="label">OOPクエスト</div>
+      </a>
+
+      <a class="node n6" href="https://ruglerugle.github.io/c-pointer-dojo/"
+         data-accent="#f0955f" data-icon="👉" data-sub="C LANGUAGE / POINTER" data-title="C POINTER DOJO"
+         data-desc="変数とアドレスからmalloc/free、二重ポインタ、連結リストまで。Cコードを1行ずつ実行してスタック/ヒープを可視化。"
+         data-tags="C言語,ポインタ" data-num="6">
+        <div class="badge" style="--accent:#f0955f">👉<span class="num">6</span></div>
+        <div class="label">C POINTER DOJO</div>
+      </a>
+
+    </div>
+  </div>
+
+  <div class="questlog" id="questlog">
+    <p class="hint">地図上のクエストにカーソルを合わせる（またはタップする）と、ここに詳細が表示されます。</p>
   </div>
 
   <footer>
@@ -189,6 +315,37 @@
 
 <script>
   document.getElementById('year').textContent = new Date().getFullYear();
+
+  var log = document.getElementById('questlog');
+  var nodes = document.querySelectorAll('.node');
+
+  function renderLog(n){
+    var accent = n.dataset.accent;
+    var tags = n.dataset.tags.split(',').map(function(t){return '<span class="tag">'+t+'</span>'}).join('');
+    log.style.setProperty('--accent', accent);
+    log.innerHTML =
+      '<div class="qi" style="--accent:'+accent+'">'+n.dataset.icon+'</div>' +
+      '<div class="qt">' +
+        '<div class="qsub" style="color:'+accent+'">QUEST '+n.dataset.num+' ・ '+n.dataset.sub+'</div>' +
+        '<h3>'+n.dataset.title+'</h3>' +
+        '<p>'+n.dataset.desc+'</p>' +
+        '<div class="tags">'+tags+'</div>' +
+        '<a class="go" href="'+n.getAttribute('href')+'">このクエストへ出発する →</a>' +
+      '</div>';
+  }
+
+  nodes.forEach(function(n){
+    n.addEventListener('mouseenter', function(){
+      nodes.forEach(function(x){x.classList.remove('active')});
+      n.classList.add('active');
+      renderLog(n);
+    });
+    n.addEventListener('focus', function(){
+      nodes.forEach(function(x){x.classList.remove('active')});
+      n.classList.add('active');
+      renderLog(n);
+    });
+  });
 </script>
 
 <!-- Google Analytics -->
