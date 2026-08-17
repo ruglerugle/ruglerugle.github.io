@@ -305,7 +305,7 @@
       <a class="node n1" href="/algo-quest/"
          data-accent="#5ec8ff" data-icon="🗺️" data-sub="ALGORITHM" data-title="ALGO QUEST"
          data-desc="王国の物流エンジニアとして、探索・ソート・データ構造を駆使して配送網を最適化する。"
-         data-tags="アルゴリズム,データ構造" data-num="1">
+         data-tags="アルゴリズム,データ構造" data-num="1" data-time="約20分" data-level="入門">
         <div class="badge" style="--accent:#5ec8ff">🗺️<span class="num">1</span></div>
         <div class="label">ALGO QUEST</div>
       </a>
@@ -313,7 +313,7 @@
       <a class="node n2" href="/cpu-logic-game/"
          data-accent="#8f7bff" data-icon="🧮" data-sub="CPU / LOGIC CIRCUIT" data-title="論理回路CPUクエスト"
          data-desc="AND・ORゲートから積み上げ、命令が実行されるまでの論理回路とCPUの仕組みを体感する。"
-         data-tags="論理回路,CPU" data-num="2">
+         data-tags="論理回路,CPU" data-num="2" data-time="約30分" data-level="入門">
         <div class="badge" style="--accent:#8f7bff">🧮<span class="num">2</span></div>
         <div class="label">CPUクエスト</div>
       </a>
@@ -321,7 +321,7 @@
       <a class="node n3" href="/memory-quest/"
          data-accent="#ffb648" data-icon="🧠" data-sub="MEMORY / OS" data-title="MEMORY QUEST"
          data-desc="王国の記憶管理士として、RAM・スタック・ヒープ・GC・キャッシュ・仮想メモリの仕組みを巡る。"
-         data-tags="メモリ管理,OS/アーキテクチャ" data-num="3">
+         data-tags="メモリ管理,OS/アーキテクチャ" data-num="3" data-time="約40分" data-level="中級">
         <div class="badge" style="--accent:#ffb648">🧠<span class="num">3</span></div>
         <div class="label">MEMORY QUEST</div>
       </a>
@@ -329,7 +329,7 @@
       <a class="node n4" href="/net-quest/"
          data-accent="#4fd8c4" data-icon="📡" data-sub="NETWORK" data-title="NET QUEST"
          data-desc="届け、そのパケット。IPアドレスやルーティング、プロトコルの階層をたどりながら通信の仕組みを学ぶ。"
-         data-tags="ネットワーク,通信プロトコル" data-num="4">
+         data-tags="ネットワーク,通信プロトコル" data-num="4" data-time="約60分" data-level="中級">
         <div class="badge" style="--accent:#4fd8c4">📡<span class="num">4</span></div>
         <div class="label">NET QUEST</div>
       </a>
@@ -337,7 +337,7 @@
       <a class="node n5" href="/oop-game/"
          data-accent="#7fe07f" data-icon="🦒" data-sub="OBJECT ORIENTED" data-title="OOPクエスト"
          data-desc="動物園チュートリアルから始まり、クラス・継承・ポリモーフィズムなどOOPの考え方を学ぶ。"
-         data-tags="オブジェクト指向,設計" data-num="5">
+         data-tags="オブジェクト指向,設計" data-num="5" data-time="約60分" data-level="入門〜中級">
         <div class="badge" style="--accent:#7fe07f">🦒<span class="num">5</span></div>
         <div class="label">OOPクエスト</div>
       </a>
@@ -345,7 +345,7 @@
       <a class="node n6" href="/c-pointer-dojo/"
          data-accent="#f0955f" data-icon="👉" data-sub="C LANGUAGE / POINTER" data-title="C POINTER DOJO"
          data-desc="変数とアドレスからmalloc/free、二重ポインタ、連結リストまで。Cコードを1行ずつ実行してスタック/ヒープを可視化。"
-         data-tags="C言語,ポインタ" data-num="6">
+         data-tags="C言語,ポインタ" data-num="6" data-time="約40分" data-level="中級">
         <div class="badge" style="--accent:#f0955f">👉<span class="num">6</span></div>
         <div class="label">C POINTER DOJO</div>
       </a>
@@ -354,7 +354,7 @@
   </div>
 
   <div class="questlog" id="questlog">
-    <p class="hint">地図上のクエストにカーソルを合わせる（またはタップする）と、ここに詳細が表示されます。</p>
+    <p class="hint">地図上のクエストにカーソルを合わせる（またはタップする）と、ここに詳細が表示されます。<br>番号順に進めば無理なく学べます。初めての方は <strong>① ALGO QUEST（約20分・入門）</strong>から！</p>
   </div>
 
   <footer>
@@ -376,7 +376,7 @@
     log.innerHTML =
       '<div class="qi" style="--accent:'+accent+'">'+n.dataset.icon+'</div>' +
       '<div class="qt">' +
-        '<div class="qsub" style="color:'+accent+'">QUEST '+n.dataset.num+' ・ '+n.dataset.sub+'</div>' +
+        '<div class="qsub" style="color:'+accent+'">QUEST '+n.dataset.num+' ・ '+n.dataset.sub+' ・ ⏱ '+n.dataset.time+' ・ '+n.dataset.level+'</div>' +
         '<h3>'+n.dataset.title+'</h3>' +
         '<p>'+n.dataset.desc+'</p>' +
         '<div class="tags">'+tags+'</div>' +
