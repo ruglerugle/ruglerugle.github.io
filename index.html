@@ -4,13 +4,13 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>情報技術クエスト集 ― ruglerugle学習ゲーム一覧 ―</title>
-<meta name="description" content="アルゴリズム・CPU・メモリ・ネットワーク・OOP・ポインタを学べる無料ブラウザ学習ゲーム集。ワールドマップから各クエストへ出発しよう。">
+<meta name="description" content="アルゴリズム・CPU・メモリ・ネットワーク・オブジェクト指向・ポインタを学べる無料ブラウザ学習ゲーム集。ワールドマップから各クエストへ出発しよう。">
 <link rel="canonical" href="https://informatics.habatakijuku.com/">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="情報技術クエスト集">
 <meta property="og:locale" content="ja_JP">
 <meta property="og:title" content="情報技術クエスト集 ― ruglerugle学習ゲーム一覧 ―">
-<meta property="og:description" content="アルゴリズム・CPU・メモリ・ネットワーク・OOP・ポインタを学べる無料ブラウザ学習ゲーム集。">
+<meta property="og:description" content="アルゴリズム・CPU・メモリ・ネットワーク・オブジェクト指向・ポインタを学べる無料ブラウザ学習ゲーム集。">
 <meta property="og:url" content="https://informatics.habatakijuku.com/">
 <meta property="og:image" content="https://informatics.habatakijuku.com/images/ogp/hub.png">
 <meta property="og:image:width" content="1200">
@@ -22,16 +22,16 @@
   "@context": "https://schema.org",
   "@type": "ItemList",
   "name": "情報技術クエスト集",
-  "description": "アルゴリズム・CPU・メモリ・ネットワーク・OOP・ポインタを学べる無料ブラウザ学習ゲーム集。",
+  "description": "アルゴリズム・CPU・メモリ・ネットワーク・オブジェクト指向・ポインタを学べる無料ブラウザ学習ゲーム集。",
   "url": "https://informatics.habatakijuku.com/",
   "inLanguage": "ja",
   "itemListElement": [
-    { "@type": "ListItem", "position": 1, "name": "ALGO QUEST ― 王国の物流エンジニア ―", "url": "https://informatics.habatakijuku.com/algo-quest/" },
+    { "@type": "ListItem", "position": 1, "name": "アルゴリズムクエスト ― 王国の物流エンジニア ―", "url": "https://informatics.habatakijuku.com/algo-quest/" },
     { "@type": "ListItem", "position": 2, "name": "論理回路CPUクエスト", "url": "https://informatics.habatakijuku.com/cpu-logic-game/" },
-    { "@type": "ListItem", "position": 3, "name": "MEMORY QUEST ― 王国の記憶管理士 ―", "url": "https://informatics.habatakijuku.com/memory-quest/" },
-    { "@type": "ListItem", "position": 4, "name": "NET QUEST ― 届け！そのパケット ―", "url": "https://informatics.habatakijuku.com/net-quest/" },
-    { "@type": "ListItem", "position": 5, "name": "OOPクエスト ― 動物園チュートリアル ―", "url": "https://informatics.habatakijuku.com/oop-game/" },
-    { "@type": "ListItem", "position": 6, "name": "C POINTER DOJO ― ポインタ道場 ―", "url": "https://informatics.habatakijuku.com/c-pointer-dojo/" }
+    { "@type": "ListItem", "position": 3, "name": "メモリのしくみクエスト ― 王国の記憶管理士 ―", "url": "https://informatics.habatakijuku.com/memory-quest/" },
+    { "@type": "ListItem", "position": 4, "name": "ネットワーククエスト ― 届け！そのパケット ―", "url": "https://informatics.habatakijuku.com/net-quest/" },
+    { "@type": "ListItem", "position": 5, "name": "オブジェクト指向クエスト ― 動物園ではじめるクラス設計 ―", "url": "https://informatics.habatakijuku.com/oop-game/" },
+    { "@type": "ListItem", "position": 6, "name": "C言語ポインタ道場 ― コードで見るメモリの動き ―", "url": "https://informatics.habatakijuku.com/c-pointer-dojo/" }
   ]
 }
 </script>
@@ -234,7 +234,9 @@
 
     .node{max-width:30%}
     .node .badge{width:46px;height:46px;font-size:20px}
-    .node .label{font-size:9px;padding:2px 5px;white-space:normal;text-align:center;line-height:1.25}
+    .node .label{font-size:9px;padding:2px 5px;white-space:normal;text-align:center;line-height:1.25;width:max-content;max-width:104px}
+    .node.n1 .label{position:relative;left:14px}
+    .node.n4 .label{position:relative;left:-14px}
 
     .questlog{flex-direction:column}
   }
@@ -262,7 +264,7 @@
   <header>
     <span class="eyebrow">FREE BROWSER LEARNING GAMES</span>
     <h1>情報技術クエスト集</h1>
-    <p>王国に広がる6つの領域 ― アルゴリズム・OOP・CPU・メモリ・ネットワーク・ポインタ。地図から気になるクエストへ旅立とう。</p>
+    <p>王国に広がる6つの領域 ― アルゴリズム・オブジェクト指向・CPU・メモリ・ネットワーク・ポインタ。地図から気になるクエストへ旅立とう。</p>
   </header>
 
   <div class="map-frame">
@@ -303,11 +305,11 @@
 
       <!-- quest nodes -->
       <a class="node n1" href="/algo-quest/"
-         data-accent="#5ec8ff" data-icon="🗺️" data-sub="ALGORITHM" data-title="ALGO QUEST"
+         data-accent="#5ec8ff" data-icon="🗺️" data-sub="ALGORITHM" data-title="アルゴリズムクエスト"
          data-desc="王国の物流エンジニアとして、探索・ソート・データ構造を駆使して配送網を最適化する。"
          data-tags="アルゴリズム,データ構造" data-num="1" data-time="約20分" data-level="入門">
         <div class="badge" style="--accent:#5ec8ff">🗺️<span class="num">1</span></div>
-        <div class="label">ALGO QUEST</div>
+        <div class="label">アルゴリズムクエスト</div>
       </a>
 
       <a class="node n2" href="/cpu-logic-game/"
@@ -319,42 +321,42 @@
       </a>
 
       <a class="node n3" href="/memory-quest/"
-         data-accent="#ffb648" data-icon="🧠" data-sub="MEMORY / OS" data-title="MEMORY QUEST"
+         data-accent="#ffb648" data-icon="🧠" data-sub="MEMORY / OS" data-title="メモリのしくみクエスト"
          data-desc="王国の記憶管理士として、RAM・スタック・ヒープ・GC・キャッシュ・仮想メモリの仕組みを巡る。"
          data-tags="メモリ管理,OS/アーキテクチャ" data-num="3" data-time="約40分" data-level="中級">
         <div class="badge" style="--accent:#ffb648">🧠<span class="num">3</span></div>
-        <div class="label">MEMORY QUEST</div>
+        <div class="label">メモリのしくみクエスト</div>
       </a>
 
       <a class="node n4" href="/net-quest/"
-         data-accent="#4fd8c4" data-icon="📡" data-sub="NETWORK" data-title="NET QUEST"
+         data-accent="#4fd8c4" data-icon="📡" data-sub="NETWORK" data-title="ネットワーククエスト"
          data-desc="届け、そのパケット。IPアドレスやルーティング、プロトコルの階層をたどりながら通信の仕組みを学ぶ。"
          data-tags="ネットワーク,通信プロトコル" data-num="4" data-time="約60分" data-level="中級">
         <div class="badge" style="--accent:#4fd8c4">📡<span class="num">4</span></div>
-        <div class="label">NET QUEST</div>
+        <div class="label">ネットワーククエスト</div>
       </a>
 
       <a class="node n5" href="/oop-game/"
-         data-accent="#7fe07f" data-icon="🦒" data-sub="OBJECT ORIENTED" data-title="OOPクエスト"
-         data-desc="動物園チュートリアルから始まり、クラス・継承・ポリモーフィズムなどOOPの考え方を学ぶ。"
+         data-accent="#7fe07f" data-icon="🦒" data-sub="OBJECT ORIENTED" data-title="オブジェクト指向クエスト"
+         data-desc="動物園チュートリアルから始まり、クラス・継承・ポリモーフィズムなどオブジェクト指向の考え方を学ぶ。"
          data-tags="オブジェクト指向,設計" data-num="5" data-time="約30分" data-level="入門">
         <div class="badge" style="--accent:#7fe07f">🦒<span class="num">5</span></div>
-        <div class="label">OOPクエスト</div>
+        <div class="label">オブジェクト指向クエスト</div>
       </a>
 
       <a class="node n6" href="/c-pointer-dojo/"
-         data-accent="#f0955f" data-icon="👉" data-sub="C LANGUAGE / POINTER" data-title="C POINTER DOJO"
+         data-accent="#f0955f" data-icon="👉" data-sub="C LANGUAGE / POINTER" data-title="C言語ポインタ道場"
          data-desc="変数とアドレスからmalloc/free、二重ポインタ、連結リストまで。Cコードを1行ずつ実行してスタック/ヒープを可視化。"
          data-tags="C言語,ポインタ" data-num="6" data-time="約40分" data-level="中級">
         <div class="badge" style="--accent:#f0955f">👉<span class="num">6</span></div>
-        <div class="label">C POINTER DOJO</div>
+        <div class="label">C言語ポインタ道場</div>
       </a>
 
     </div>
   </div>
 
   <div class="questlog" id="questlog">
-    <p class="hint">地図上のクエストにカーソルを合わせる（またはタップする）と、ここに詳細が表示されます。<br>番号順に進めば無理なく学べます。初めての方は <strong>① ALGO QUEST（約20分・入門）</strong>から！</p>
+    <p class="hint">地図上のクエストにカーソルを合わせる（またはタップする）と、ここに詳細が表示されます。<br>番号順に進めば無理なく学べます。初めての方は <strong>① アルゴリズムクエスト（約20分・入門）</strong>から！</p>
   </div>
 
   <footer>
