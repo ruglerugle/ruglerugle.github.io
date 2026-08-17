@@ -1,5 +1,0 @@
-# すべてのファイルをETag再検証にする（デプロイ後すぐ最新版が届くように）
-# HTMLは元からmax-age=0だが、JS/CSSがmax-age=14400で最大4時間古いまま使われ、
-# HTMLとJSの版ズレも起きうるため全体を統一する。変更が無ければ304で済む。
-/*
-  Cache-Control: public, max-age=0, must-revalidate
