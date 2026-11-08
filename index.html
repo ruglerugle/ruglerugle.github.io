@@ -255,6 +255,28 @@
     .questlog h3{color:#1b2233}
     .node .label{color:#1b2233;background:rgba(255,255,255,.85)}
   }
+  .route{margin:22px auto 0;max-width:760px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.12);border-radius:14px;padding:16px 18px}
+  .route h2{font-size:16px;margin:0 0 10px;color:var(--gold)}
+  .route-list{list-style:none;margin:0;padding:0;counter-reset:r}
+  .route-list li{counter-increment:r}
+  .route-list a{display:flex;align-items:center;gap:10px;padding:8px 6px;border-bottom:1px dashed rgba(255,255,255,.12);color:#fff;text-decoration:none}
+  .route-list a::before{content:counter(r);width:22px;height:22px;border-radius:50%;background:rgba(255,255,255,.12);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;flex-shrink:0}
+  .route-list a:hover{background:rgba(255,255,255,.06)}
+  .ri{font-size:20px}
+  .rt{flex:1;min-width:0;display:flex;flex-direction:column}
+  .rt small{color:var(--tm);font-size:11.5px}
+  .rp{font-size:12px;font-weight:700;color:#9fe3a8;white-space:nowrap}
+  .route-more{font-size:12.5px;color:var(--ts);margin:10px 0 0}
+  .route-more a{color:var(--gold)}
+  .questlog .qprog{color:#9fe3a8;font-weight:700}
+  @media (prefers-color-scheme: light){
+    .route{background:rgba(255,255,255,.75);border-color:rgba(20,30,60,.12)}
+    .route h2{color:#8a6a24}
+    .route-list a{color:#1b2233;border-bottom-color:rgba(20,30,60,.12)}
+    .route-list a::before{background:rgba(20,30,60,.08)}
+    .rp,.questlog .qprog{color:#2f7a3b}
+    .route-more a{color:#8a6a24}
+  }
 </style>
 </head>
 <body>
@@ -264,7 +286,7 @@
   <header>
     <span class="eyebrow">FREE BROWSER LEARNING GAMES</span>
     <h1>情報技術クエスト集</h1>
-    <p>王国に広がる6つの領域 ― アルゴリズム・オブジェクト指向・CPU・メモリ・ネットワーク・ポインタ。地図から気になるクエストへ旅立とう。</p>
+    <p>スイッチから CPU、メモリ、ポインタ、アルゴリズム、オブジェクト指向、そしてネットワークへ。6つのクエスト・全62ステージを、ねこ博士とうさ美の授業で、手を動かしながら学ぼう。</p>
   </header>
 
   <div class="map-frame">
@@ -303,61 +325,74 @@
 
       <div class="fog"></div>
 
-      <!-- quest nodes -->
-      <a class="node n1" href="/algo-quest/"
-         data-accent="#5ec8ff" data-icon="🗺️" data-sub="ALGORITHM" data-title="アルゴリズムクエスト"
-         data-desc="王国の物流エンジニアとして、探索・ソート・データ構造を駆使して配送網を最適化する。"
-         data-tags="アルゴリズム,データ構造" data-num="1" data-time="約20分" data-level="入門">
-        <div class="badge" style="--accent:#5ec8ff">🗺️<span class="num">1</span></div>
-        <div class="label">アルゴリズムクエスト</div>
-      </a>
-
-      <a class="node n2" href="/cpu-logic-game/"
+      <!-- quest nodes（おすすめの順番：回路 → メモリ → ポインタ → アルゴリズム → オブジェクト指向 → ネットワーク） -->
+      <a class="node n1" href="/cpu-logic-game/"
          data-accent="#8f7bff" data-icon="🧮" data-sub="CPU / LOGIC CIRCUIT" data-title="論理回路CPUクエスト"
-         data-desc="AND・ORゲートから積み上げ、命令が実行されるまでの論理回路とCPUの仕組みを体感する。"
-         data-tags="論理回路,CPU" data-num="2" data-time="約30分" data-level="入門">
-        <div class="badge" style="--accent:#8f7bff">🧮<span class="num">2</span></div>
+         data-desc="スイッチしか無いのに、なぜ計算できるのか。2進数・トランジスタ・論理ゲートから足し算の回路、覚える回路、命令を1つずつこなす小さなCPUまで、回路を自分で配線して確かめる。"
+         data-tags="2進数,論理回路,CPU" data-num="1" data-time="全10ステージ・約2時間" data-level="入門" data-key="cpuLogicQuestProgress_v2" data-total="10">
+        <div class="badge" style="--accent:#8f7bff">🧮<span class="num">1</span></div>
         <div class="label">CPUクエスト</div>
       </a>
 
-      <a class="node n3" href="/memory-quest/"
+      <a class="node n2" href="/memory-quest/"
          data-accent="#ffb648" data-icon="🧠" data-sub="MEMORY / OS" data-title="メモリのしくみクエスト"
-         data-desc="王国の記憶管理士として、RAM・スタック・ヒープ・GC・キャッシュ・仮想メモリの仕組みを巡る。"
-         data-tags="メモリ管理,OS/アーキテクチャ" data-num="3" data-time="約40分" data-level="中級">
-        <div class="badge" style="--accent:#ffb648">🧠<span class="num">3</span></div>
+         data-desc="名前で書いた変数は、メモリのどこに置かれるのか。番地・キャッシュ・スタック・ヒープ・ポインタ・GC・メモリのバグ・仮想メモリまで、メモリの中を動かして確かめる。"
+         data-tags="メモリ,OS" data-num="2" data-time="全10ステージ・約2時間" data-level="入門〜中級" data-key="memoryQuestProgress_v2" data-total="10">
+        <div class="badge" style="--accent:#ffb648">🧠<span class="num">2</span></div>
         <div class="label">メモリのしくみクエスト</div>
       </a>
 
-      <a class="node n4" href="/net-quest/"
-         data-accent="#4fd8c4" data-icon="📡" data-sub="NETWORK" data-title="ネットワーククエスト"
-         data-desc="届け、そのパケット。IPアドレスやルーティング、プロトコルの階層をたどりながら通信の仕組みを学ぶ。"
-         data-tags="ネットワーク,通信プロトコル" data-num="4" data-time="約60分" data-level="中級">
-        <div class="badge" style="--accent:#4fd8c4">📡<span class="num">4</span></div>
-        <div class="label">ネットワーククエスト</div>
+      <a class="node n3" href="/c-pointer-dojo/"
+         data-accent="#f0955f" data-icon="👉" data-sub="C LANGUAGE / POINTER" data-title="C言語ポインタ道場"
+         data-desc="本物のCコードを1行ずつ実行し、スタックとヒープ、ポインタの矢印を追う。& と * から malloc・構造体・ポインタのポインタ・連結リスト、典型的なバグまで。"
+         data-tags="C言語,ポインタ" data-num="3" data-time="全8ステージ・約2時間" data-level="中級" data-key="cPointerDojoProgress_v2" data-total="8">
+        <div class="badge" style="--accent:#f0955f">👉<span class="num">3</span></div>
+        <div class="label">C言語ポインタ道場</div>
+      </a>
+
+      <a class="node n4" href="/algo-quest/"
+         data-accent="#5ec8ff" data-icon="🗺️" data-sub="ALGORITHM" data-title="アルゴリズムクエスト"
+         data-desc="同じ答えを、もっと少ない手間で。計算量（O記法）を物差しに、探索・ハッシュ表・ソート・幅優先探索・ダイクストラ法・動的計画法を、手間を数えて確かめる。"
+         data-tags="アルゴリズム,計算量" data-num="4" data-time="全9ステージ・約2時間" data-level="入門〜中級" data-key="algoQuestProgress_v2" data-total="9">
+        <div class="badge" style="--accent:#5ec8ff">🗺️<span class="num">4</span></div>
+        <div class="label">アルゴリズムクエスト</div>
       </a>
 
       <a class="node n5" href="/oop-game/"
          data-accent="#7fe07f" data-icon="🦒" data-sub="OBJECT ORIENTED" data-title="オブジェクト指向クエスト"
-         data-desc="動物園チュートリアルから始まり、クラス・継承・ポリモーフィズムなどオブジェクト指向の考え方を学ぶ。"
-         data-tags="オブジェクト指向,設計" data-num="5" data-time="約30分" data-level="入門">
+         data-desc="プログラムは書いたあとの方が長い。動物園の管理プログラムを Java で組み立てながら、クラス・継承・ポリモーフィズム・インターフェース・カプセル化・UML・設計の判断を学ぶ。"
+         data-tags="オブジェクト指向,Java" data-num="5" data-time="全10ステージ・約2時間" data-level="中級" data-key="oopQuestProgress_v2" data-total="10">
         <div class="badge" style="--accent:#7fe07f">🦒<span class="num">5</span></div>
         <div class="label">オブジェクト指向クエスト</div>
       </a>
 
-      <a class="node n6" href="/c-pointer-dojo/"
-         data-accent="#f0955f" data-icon="👉" data-sub="C LANGUAGE / POINTER" data-title="C言語ポインタ道場"
-         data-desc="変数とアドレスからmalloc/free、二重ポインタ、連結リストまで。Cコードを1行ずつ実行してスタック/ヒープを可視化。"
-         data-tags="C言語,ポインタ" data-num="6" data-time="約40分" data-level="中級">
-        <div class="badge" style="--accent:#f0955f">👉<span class="num">6</span></div>
-        <div class="label">C言語ポインタ道場</div>
+      <a class="node n6" href="/net-quest/"
+         data-accent="#4fd8c4" data-icon="📡" data-sub="NETWORK" data-title="ネットワーククエスト"
+         data-desc="動画はどうやって地球の裏から届くのか。スイッチ・IP・ARP・ルーター・DHCP・DNS・TCP・HTTP・TLS・NAT・IPv6・ファイアウォールまで、やり取りを1歩ずつ追う。"
+         data-tags="ネットワーク,セキュリティ" data-num="6" data-time="全15ステージ・約3時間" data-level="中級" data-key="netQuestProgress_v2" data-total="15">
+        <div class="badge" style="--accent:#4fd8c4">📡<span class="num">6</span></div>
+        <div class="label">ネットワーククエスト</div>
       </a>
 
     </div>
   </div>
 
   <div class="questlog" id="questlog">
-    <p class="hint">地図上のクエストにカーソルを合わせる（またはタップする）と、ここに詳細が表示されます。<br>番号順に進めば無理なく学べます。初めての方は <strong>① アルゴリズムクエスト（約20分・入門）</strong>から！</p>
+    <p class="hint">地図上のクエストにカーソルを合わせる（またはタップする）と、ここに詳細が表示されます。<br>番号は、前のクエストで学んだことを次で使う順番です。初めての方は <strong>① 論理回路CPUクエスト（2進数から始まります）</strong>から！</p>
   </div>
+
+  <section class="route" aria-labelledby="route-h">
+    <h2 id="route-h">おすすめの順番と、きみの進み具合</h2>
+    <ol class="route-list">
+      <li><a href="/cpu-logic-game/"><span class="ri" style="--accent:#8f7bff">🧮</span><span class="rt"><b>論理回路CPUクエスト</b><small>全10ステージ・約2時間</small></span><span class="rp" data-key="cpuLogicQuestProgress_v2" data-total="10"></span></a></li>
+      <li><a href="/memory-quest/"><span class="ri" style="--accent:#ffb648">🧠</span><span class="rt"><b>メモリのしくみクエスト</b><small>全10ステージ・約2時間</small></span><span class="rp" data-key="memoryQuestProgress_v2" data-total="10"></span></a></li>
+      <li><a href="/c-pointer-dojo/"><span class="ri" style="--accent:#f0955f">👉</span><span class="rt"><b>C言語ポインタ道場</b><small>全8ステージ・約2時間</small></span><span class="rp" data-key="cPointerDojoProgress_v2" data-total="8"></span></a></li>
+      <li><a href="/algo-quest/"><span class="ri" style="--accent:#5ec8ff">🗺️</span><span class="rt"><b>アルゴリズムクエスト</b><small>全9ステージ・約2時間</small></span><span class="rp" data-key="algoQuestProgress_v2" data-total="9"></span></a></li>
+      <li><a href="/oop-game/"><span class="ri" style="--accent:#7fe07f">🦒</span><span class="rt"><b>オブジェクト指向クエスト</b><small>全10ステージ・約2時間</small></span><span class="rp" data-key="oopQuestProgress_v2" data-total="10"></span></a></li>
+      <li><a href="/net-quest/"><span class="ri" style="--accent:#4fd8c4">📡</span><span class="rt"><b>ネットワーククエスト</b><small>全15ステージ・約3時間</small></span><span class="rp" data-key="netQuestProgress_v2" data-total="15"></span></a></li>
+    </ol>
+    <p class="route-more">読み物：<a href="https://memory-safety.habatakijuku.com/">『片付けを忘れたサーバー』</a>（メモリの片付けの間違いが、本物のサーバーで何を起こしたか。メモリのしくみクエストのあとに）</p>
+  </section>
 
   <footer>
     <p>すべて無料・ブラウザだけで遊べます。 &copy; <span id="year"></span> ruglerugle</p>
@@ -371,6 +406,16 @@
   var log = document.getElementById('questlog');
   var nodes = document.querySelectorAll('.node');
 
+  function progressOf(key, total){
+    try {
+      var v = JSON.parse(localStorage.getItem(key) || "[]");
+      return Array.isArray(v) ? v.filter(function(x){ return x >= 1 && x <= total; }).length : 0;
+    } catch (e) { return 0; }
+  }
+  document.querySelectorAll(".rp").forEach(function(el){
+    var t = +el.dataset.total, c = progressOf(el.dataset.key, t);
+    el.textContent = c ? (c === t ? "クリア ✓" : c + " / " + t) : "";
+  });
   function renderLog(n){
     var accent = n.dataset.accent;
     var tags = n.dataset.tags.split(',').map(function(t){return '<span class="tag">'+t+'</span>'}).join('');
@@ -380,6 +425,7 @@
       '<div class="qt">' +
         '<div class="qsub" style="color:'+accent+'">QUEST '+n.dataset.num+' ・ '+n.dataset.sub+' ・ ⏱ '+n.dataset.time+' ・ '+n.dataset.level+'</div>' +
         '<h3>'+n.dataset.title+'</h3>' +
+        (function(){ var t=+n.dataset.total, c=progressOf(n.dataset.key, t); return c ? '<p class="qprog">きみの進み具合：'+(c===t?'クリア ✓':c+' / '+t+' ステージ')+'</p>' : ''; })() +
         '<p>'+n.dataset.desc+'</p>' +
         '<div class="tags">'+tags+'</div>' +
         '<a class="go" href="'+n.getAttribute('href')+'">このクエストへ出発する →</a>' +
@@ -408,5 +454,6 @@
   gtag('js', new Date());
   gtag('config', 'G-9RTQCP2HXM');
 </script>
+<script src="https://my.habatakijuku.com/sync.js" defer></script>
 </body>
 </html>
